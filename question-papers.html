@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Previous Question Papers — Goal2Govt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html { background: #F1EFE7; scroll-behavior: smooth; }
+  body { background: #F1EFE7; color: #20242B; font-family: 'Inter', sans-serif; line-height: 1.5; }
+  h1,h2,h3,h4 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.02em; margin: 0; }
+  a, button { color: inherit; text-decoration: none; font-family: inherit; }
+
+  .topbar { position: sticky; top: 0; z-index: 40; background: #20242B; color: #fff; border-bottom: 6px solid #F2B705; }
+  .topbar-inner { max-width: 1180px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-badge { display: flex; flex-direction: column; align-items: center; flex: none; }
+  .brand-badge svg { width: 40px; height: 40px; display: block; }
+  .brand-badge .india-text { font-size: 8px; font-weight: 700; color: #F2B705; letter-spacing: 0.1em; text-transform: uppercase; margin-top: -2px; }
+  .brand h1 { font-size: 18px; color: #fff; }
+  .brand h1 span { color: #F2B705; }
+  nav.mainnav { display: flex; gap: 18px; }
+  nav.mainnav a { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #cfd3db; }
+  nav.mainnav a:hover, nav.mainnav a.active { color: #F2B705; }
+
+  .page-head { max-width: 1180px; margin: 0 auto; padding: 32px 20px 10px; }
+  .page-head h2 { font-size: clamp(24px,3.5vw,34px); }
+  .page-head p { color: #3A3F48; margin-top: 8px; font-size: 14px; max-width: 720px; }
+
+  .tabs { max-width: 1180px; margin: 20px auto 0; padding: 0 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .tab-btn {
+    background: #fff; border: 2px solid #D8D3C4; border-radius: 30px; padding: 8px 20px;
+    font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
+    cursor: pointer; text-transform: uppercase;
+  }
+  .tab-btn.active[data-tier="10th"] { background: #2F7D4F; color: #fff; border-color: #2F7D4F; }
+  .tab-btn.active[data-tier="12th"] { background: #1F5FA8; color: #fff; border-color: #1F5FA8; }
+  .tab-btn.active[data-tier="grad"] { background: #C1442E; color: #fff; border-color: #C1442E; }
+
+  .tier-panel { display: none; max-width: 1180px; margin: 24px auto 0; padding: 0 20px; }
+  .tier-panel.active { display: block; }
+
+  .job-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 12px; margin-bottom: 10px; }
+  .job-btn {
+    background: #fff; border: 1px solid #D8D3C4; border-radius: 10px; padding: 14px 16px;
+    text-align: left; cursor: pointer; box-shadow: 0 6px 18px rgba(32,36,43,0.08);
+  }
+  .job-btn .code { display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-bottom: 6px; color: #fff; }
+  [data-tier="10th"] .job-btn .code { background: #2F7D4F; }
+  [data-tier="12th"] .job-btn .code { background: #1F5FA8; }
+  [data-tier="grad"] .job-btn .code { background: #C1442E; }
+  .job-btn h4 { font-size: 14px; font-family: 'Oswald'; font-weight: 500; text-transform: none; }
+  .job-btn.active { outline: 3px solid #F2B705; }
+
+  .papers-box {
+    background: #fff; border: 2px solid #D8D3C4; border-radius: 12px; padding: 20px; margin-top: 6px; display: none;
+  }
+  .papers-box.open { display: block; }
+  .papers-box h3 { font-size: 16px; margin-bottom: 12px; }
+  .paper-list { display: flex; flex-wrap: wrap; gap: 10px; }
+  .paper-list a.paper-btn {
+    display: inline-block; background: #F2B705; color: #20242B; font-weight: 700; font-size: 13px;
+    padding: 10px 18px; border-radius: 8px;
+  }
+  .paper-list a.paper-btn:hover { filter: brightness(0.95); }
+  .no-papers { color: #7a7566; font-size: 13px; }
+
+  footer { background: #20242B; color: #c9cdd6; padding: 20px 20px; font-size: 11.5px; margin-top: 40px; }
+  footer .foot-inner { max-width: 1180px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-badge">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 8 C28 13 10 32 12 55 C14 68 28 82 50 88 C72 82 86 68 88 55 C90 32 72 13 50 8 Z" fill="none" stroke="#F2B705" stroke-width="2.5"/>
+          <circle cx="50" cy="48" r="12" fill="none" stroke="#F2B705" stroke-width="1.5"/>
+          <circle cx="50" cy="48" r="3" fill="#F2B705"/>
+        </svg>
+        <span class="india-text">INDIA</span>
+      </div>
+      <h1>Goal2Govt <span>Next Step</span></h1>
+    </a>
+    <nav class="mainnav">
+      <a href="index.html">Home</a>
+      <a href="question-papers.html" class="active">Question Papers</a>
+      <a href="about.html">About Us</a>
+    </nav>
+  </div>
+</div>
+
+<div class="page-head">
+  <h2>Previous Year Question Papers</h2>
+  <p>Pick your category, then pick a job to see its available previous-year papers as downloadable PDFs.</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn" data-tier="10th" onclick="showTier('10th')">After 10th (8 jobs)</button>
+  <button class="tab-btn" data-tier="12th" onclick="showTier('12th')">After 12th (10 jobs)</button>
+  <button class="tab-btn" data-tier="grad" onclick="showTier('grad')">After Graduation (10 jobs)</button>
+</div>
+
+<div class="tier-panel" data-tier="10th" id="panel-10th">
+  <div class="job-grid" id="jobs-10th"></div>
+  <div class="papers-box" id="papers-10th"></div>
+</div>
+<div class="tier-panel" data-tier="12th" id="panel-12th">
+  <div class="job-grid" id="jobs-12th"></div>
+  <div class="papers-box" id="papers-12th"></div>
+</div>
+<div class="tier-panel" data-tier="grad" id="panel-grad">
+  <div class="job-grid" id="jobs-grad"></div>
+  <div class="papers-box" id="papers-grad"></div>
+</div>
+
+<footer>
+  <div class="foot-inner">© <span id="year"></span> Goal2Govt. All information is for guidance only — always verify with the official notification.</div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ===================================================================
+     JOB LIST — same 8 / 10 / 10 jobs used across the site.
+     =================================================================== */
+  const jobs = {
+    "10th": [
+      {id:"ssc-mts", code:"10-01", name:"SSC MTS / Havaldar"},
+      {id:"rrb-groupd", code:"10-02", name:"Railway Group D"},
+      {id:"india-post-gds", code:"10-03", name:"India Post GDS"},
+      {id:"police-constable-state", code:"10-04", name:"Police Constable (State)"},
+      {id:"forest-guard", code:"10-05", name:"Forest Guard"},
+      {id:"bsf-cisf-crpf", code:"10-06", name:"BSF / CISF / CRPF Constable"},
+      {id:"army-agniveer-gd", code:"10-07", name:"Army Agniveer (GD)"},
+      {id:"psu-apprentice", code:"10-08", name:"PSU Apprentice"}
+    ],
+    "12th": [
+      {id:"ssc-chsl", code:"12-01", name:"SSC CHSL"},
+      {id:"ssc-gd-constable", code:"12-02", name:"SSC GD Constable"},
+      {id:"rrb-ntpc-ug", code:"12-03", name:"Railway NTPC (UG)"},
+      {id:"india-post-postal-assistant", code:"12-04", name:"India Post PA / SA"},
+      {id:"state-police-constable-12", code:"12-05", name:"State Police Constable"},
+      {id:"army-agniveer-tech-clerk", code:"12-06", name:"Army Agniveer (Tech/Clerk)"},
+      {id:"navy-ssr-airforce-agniveer", code:"12-07", name:"Navy SSR / Air Force Agniveer"},
+      {id:"nda", code:"12-08", name:"NDA (Army, Navy, Air Force)"},
+      {id:"state-ldc-junior-assistant", code:"12-09", name:"State LDC / Junior Assistant"},
+      {id:"forest-dept-other-state", code:"12-10", name:"Forest Dept / Other State Jobs"}
+    ],
+    "grad": [
+      {id:"upsc-civil-services", code:"GR-01", name:"UPSC Civil Services"},
+      {id:"ssc-cgl", code:"GR-02", name:"SSC CGL"},
+      {id:"ssc-cpo", code:"GR-03", name:"SSC CPO"},
+      {id:"bank-po", code:"GR-04", name:"Bank PO"},
+      {id:"rrb-ntpc-graduate", code:"GR-05", name:"Railway NTPC (Graduate)"},
+      {id:"upsc-cds-capf", code:"GR-06", name:"UPSC CDS / CAPF"},
+      {id:"income-tax-inspector", code:"GR-07", name:"Income Tax Inspector"},
+      {id:"epfo-eo-ao", code:"GR-08", name:"EPFO EO / AO"},
+      {id:"state-psc-group12", code:"GR-09", name:"State PSC Group 1 / 2"},
+      {id:"other-group-ab-jobs", code:"GR-10", name:"Other Group A & B Jobs"}
+    ]
+  };
+
+  /* ===================================================================
+     PDF PAPERS — HOW TO ADD YOUR OWN FILES
+     1. Drop your PDF files into the /papers folder next to this HTML file.
+     2. Add an entry below under the matching job id, e.g.:
+        "ssc-mts": [
+          { label: "2023 Paper 1", file: "papers/ssc-mts-2023-paper1.pdf" },
+          { label: "2022 Paper 1", file: "papers/ssc-mts-2022-paper1.pdf" }
+        ],
+     3. Leave a job's array empty ( [] ) until you have papers for it —
+        the page will show "No papers uploaded yet" automatically.
+     =================================================================== */
+  const papers = {
+    "ssc-mts": [],
+    "rrb-groupd": [],
+    "india-post-gds": [],
+    "police-constable-state": [],
+    "forest-guard": [],
+    "bsf-cisf-crpf": [],
+    "army-agniveer-gd": [],
+    "psu-apprentice": [],
+
+    "ssc-chsl": [],
+    "ssc-gd-constable": [],
+    "rrb-ntpc-ug": [],
+    "india-post-postal-assistant": [],
+    "state-police-constable-12": [],
+    "army-agniveer-tech-clerk": [],
+    "navy-ssr-airforce-agniveer": [],
+    "nda": [],
+    "state-ldc-junior-assistant": [],
+    "forest-dept-other-state": [],
+
+    "upsc-civil-services": [],
+    "ssc-cgl": [],
+    "ssc-cpo": [],
+    "bank-po": [],
+    "rrb-ntpc-graduate": [],
+    "upsc-cds-capf": [],
+    "income-tax-inspector": [],
+    "epfo-eo-ao": [],
+    "state-psc-group12": [],
+    "other-group-ab-jobs": []
+  };
+
+  function renderJobs(tier) {
+    const container = document.getElementById('jobs-' + tier);
+    container.innerHTML = jobs[tier].map(j => `
+      <button class="job-btn" data-tier="${tier}" data-job="${j.id}" onclick="showPapers('${tier}','${j.id}','${j.name.replace(/'/g,"\\'")}')">
+        <span class="code">${j.code}</span>
+        <h4>${j.name}</h4>
+      </button>
+    `).join('');
+  }
+  ['10th','12th','grad'].forEach(renderJobs);
+
+  function showTier(tier) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tier === tier));
+    document.querySelectorAll('.tier-panel').forEach(p => p.classList.toggle('active', p.dataset.tier === tier));
+    history.replaceState(null, '', '#' + tier);
+  }
+
+  function showPapers(tier, jobId, jobName) {
+    document.querySelectorAll('#jobs-' + tier + ' .job-btn').forEach(b => b.classList.toggle('active', b.dataset.job === jobId));
+    const box = document.getElementById('papers-' + tier);
+    const list = papers[jobId] || [];
+    box.innerHTML = `
+      <h3>${jobName} — Previous Papers</h3>
+      ${list.length
+        ? `<div class="paper-list">${list.map(p => `<a class="paper-btn" href="${p.file}" target="_blank" rel="noopener">${p.label}</a>`).join('')}</div>`
+        : `<p class="no-papers">No papers uploaded yet for this job. Add PDF files to the /papers folder and list them in question-papers.html.</p>`}
+    `;
+    box.classList.add('open');
+  }
+
+  // Open the right tab based on URL hash (e.g. question-papers.html#12th)
+  const initial = (location.hash || '#10th').replace('#','');
+  showTier(['10th','12th','grad'].includes(initial) ? initial : '10th');
+</script>
+</body>
+</html>
